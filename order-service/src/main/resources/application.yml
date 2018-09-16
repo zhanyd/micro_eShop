@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
     datasource:
@@ -24,8 +24,8 @@ spring:
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
 mybatis:
-  mapper-locations: classpath:com/cart/eshop/biz/mapping/*.xml
-  type-aliases-package: com.cart.eshop.biz.model
+  mapper-locations: classpath:com/order/eshop/biz/mapping/*.xml
+  type-aliases-package: com.order.eshop.biz.model
 
 #pagehelper分页插件
 pagehelper:
@@ -38,5 +38,6 @@ logging:
   config: classpath:logback-spring.xml
   #level:
     #com.nongjicai.app.mapper: trace
-    
-    
+
+
+

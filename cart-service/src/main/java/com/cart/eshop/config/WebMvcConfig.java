@@ -15,6 +15,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new PermissionInterceptor()).addPathPatterns("/**")
-                .excludePathPatterns("/error","/user/isUserExist","/user/login","/");
+                .excludePathPatterns("/error","/cart/addProduct","/user/login","/");
     }
 }
