@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/common/bootstrap-4.1.0/css/bootstrap.css">
+</head>
+
+<body>
+    <!-- container -->
+    <div class="container content">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">产品id</th>
+                    <th scope="col">产品名称</th>
+                    <th scope="col">数量</th>
+                    <th scope="col">价格</th>
+                </tr>
+            </thead>
+            <tbody class="product_tbody">
+            </tbody>
+        </table>
+        <input type="button" class="btn btn-primary" onclick="goSettle()" value="结算">
+    </div>
+    <script src="/common/jquery/jquery-3.1.1.js"></script>
+    <script src="/common/bootstrap-4.1.0/js/bootstrap.bundle.js"></script>
+    <script src="/common/bootstrap-4.1.0/js/bootstrap.js"></script>
+
+    <script>
+        $(function(){
+            $.ajax({
+                type: "POST",
+                url: "/cart/getCartProductList",
+                data: {userId: 1},
+                success: function (data) {
+                    console.log(data)
+                    let str = ''
+                    for(let i = 0; i < data.data.length; i++){
+                        str += '<tr>'
+                            str += '<td>' + data.data[i].product_id + '</td>'
+                            str += '<td>' + data.data[i].product_name + '</td>'
+                            str += '<td>' + data.data[i].num + '</td>'
+                            str += '<td>' + data.data[i].total_price + '</td>'
+                        str += '</tr>'
+                    }
+                    $(".product_tbody").append(str)
+                }
+            })
+        })
+        
+        function goSettle() {
+            let productList = []
+            let product = {}
+            $(".product_tbody tr").each(function () {
+                product.product_id = $(this).find("td").eq(0).text()
+                product.num = $(this).find("td").eq(2).text()
+                product.total_price = $(this).find("td").eq(3).text()
+                productList.push(product)
+            })
+            console.log(productList)
+            console.log(JSON.stringify(productList))
+            $.ajax({
+                type: "POST",
+                url: "/cart/addOrder",
+                data: {userId: 1,productListJSonStr:JSON.stringify(productList)},
+                success: function (data) {
+                    console.log(data)
+                }
+            })
+        }
+
+
+    </script>
+</body>
+
+</html>

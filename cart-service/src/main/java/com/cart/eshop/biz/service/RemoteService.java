@@ -1,5 +1,6 @@
 package com.cart.eshop.biz.service;
 
+import feign.Param;
 import feign.RequestLine;
 
 /**
@@ -8,5 +9,5 @@ import feign.RequestLine;
 public interface RemoteService {
 
     @RequestLine("POST /order/addOrder")
-    String addOrder();
+    String addOrder(@Param("userId") Integer userId, @Param("productListJSonStr") String productListJSonStr);
 }

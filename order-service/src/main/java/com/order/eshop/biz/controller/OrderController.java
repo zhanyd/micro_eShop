@@ -1,10 +1,9 @@
 package com.order.eshop.biz.controller;
 
 import com.order.eshop.common.ApiResult;
+import feign.Param;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Administrator on 2018/9/14 0014.
@@ -15,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
     @PostMapping("addOrder")
-    public ApiResult<String> addProduct(Integer userId, Integer productId, Integer num, Integer totalPice){
+    public ApiResult<String> addProduct(@RequestParam Integer userId, @RequestParam String productListJSonStr){
         ApiResult<String> result = new ApiResult<String>();
-        System.out.println("添加到订单");
+        System.out.println(productListJSonStr);
         return result.success("添加到订单");
     }
 }
