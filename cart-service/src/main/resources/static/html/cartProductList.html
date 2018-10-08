@@ -53,6 +53,7 @@
         })
         
         function goSettle() {
+            let jsonData = {}
             let productList = []
             let product = {}
             $(".product_tbody tr").each(function () {
@@ -61,12 +62,15 @@
                 product.total_price = $(this).find("td").eq(3).text()
                 productList.push(product)
             })
-            console.log(productList)
-            console.log(JSON.stringify(productList))
+
+            jsonData.productList = productList
+            jsonData.userId = 1
+            console.log(jsonData)
+            console.log(JSON.stringify(jsonData))
             $.ajax({
                 type: "POST",
                 url: "/cart/addOrder",
-                data: {userId: 1,productListJSonStr:JSON.stringify(productList)},
+                data: {productListJSonStr:JSON.stringify(jsonData)},
                 success: function (data) {
                     console.log(data)
                 }

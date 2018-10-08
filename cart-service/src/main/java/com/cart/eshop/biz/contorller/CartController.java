@@ -52,15 +52,15 @@ public class CartController {
      * @return
      */
     @RequestMapping("addOrder")
-    public ApiResult<String> addProduct(Integer userId, String productListJSonStr){
+    public ApiResult<String> addProduct(String productListJSonStr){
         ApiResult<String> result = new ApiResult<String>();
         System.out.println("添加到订单");
         System.out.println(productListJSonStr);
         RemoteService service = Feign.builder()
-                .encoder(new JacksonEncoder())
+                //.encoder(new JacksonEncoder())
                 //.decoder(new JacksonDecoder())
                 .target(RemoteService.class, "http://127.0.0.1:8081");
-        String reuslt = service.addOrder(userId,productListJSonStr);
+        String reuslt = service.addOrder(productListJSonStr);
         System.out.println(reuslt);
         JSONObject jsonObject = JSONObject.parseObject(reuslt);
         System.out.println(jsonObject.get("data"));
