@@ -2,6 +2,8 @@ package com.order.eshop.biz.mapper;
 
 import com.order.eshop.biz.model.OrderInfo;
 
+import java.util.Map;
+
 public interface OrderInfoMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface OrderInfoMapper {
     int updateByPrimaryKeySelective(OrderInfo record);
 
     int updateByPrimaryKey(OrderInfo record);
+
+    int insertByProductArrayList(Map<String,Object> param);
 }

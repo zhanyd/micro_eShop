@@ -57,6 +57,7 @@
             let productList = []
             let product = {}
             $(".product_tbody tr").each(function () {
+                product = {}
                 product.product_id = $(this).find("td").eq(0).text()
                 product.num = $(this).find("td").eq(2).text()
                 product.total_price = $(this).find("td").eq(3).text()
